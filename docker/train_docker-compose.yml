@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+
+  train_yolo:
+    container_name: train_yolo
+    build:
+      context: ../docker/train/
+      dockerfile: Dockerfile
+    image: train_yolo
+    runtime: nvidia
+    environment:
+      DISPLAY: $DISPLAY
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,video,utility,graphics
+      QT_X11_NO_MITSHM: '1'
+    network_mode: host
+    ipc: host
+    privileged: true
+    stdin_open: true
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $HOME/.Xauthority:/root/.Xauthority
+      - ../src/anonymized_coco:/root/
+      - ../data/:/root/data/
+    command:
+    - bash
+    - -c
+    - | 
+        tail -f /dev/null 

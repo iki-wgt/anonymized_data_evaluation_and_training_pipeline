@@ -1,0 +1,11 @@
+scene_name: 'org_on_org_coco' # name of dataset
+path_anno: 'path_to_repo/data/coco/annotations/instances_val2017.json' # path of coco annotations
+path_imgs: 'path_to_repo/data/coco/val2017'
+model_path: '/data_private/ss24_weiss_privacy_dataset/src/train_YOLOv10/runs/detect'
+image_file_format: 'jpg'
+# array of wanted img ids (null means all ids)
+img_ids: null # img to be evaluated on
+cat_ids: null # wanted ids
+# evaluation save paths
+path_detections: 'path_to_repo/data/detections' # path where to save detections
+path_eval: 'path_to_repo/data/eval' # path where to save evaluation results
