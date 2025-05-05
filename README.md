@@ -4,10 +4,12 @@ Repo is currently in a Work-in-Progress state in preparation for paper publicati
 Code might not ready to run & documentation might not complete.
 
 # Pipeline for Anonymization, Training and Evaluation of YOLO on Anonymized Data
-This repository provides a pipeline for anonymizing data & train and evaluat YOLO object detection models on privacy-preserving data.
+This repository provides a pipeline for anonymizing data & train/evaluat YOLO object detection models on anonymized data.
 
-**Link to paper, graphs and other visualization will be provided at publication**
+**Link to paper, details of training, graphs and other visualization will be provided at publication**
+
 **Own Dataset, along further details, will be released upon publication**
+
 **Repo is currently in a Work-in-Progress state in preparation for paper publication** 
 
 **Features**:
@@ -16,7 +18,7 @@ This repository provides a pipeline for anonymizing data & train and evaluat YOL
 - Evaluation using enhanced COCO metrics (AP, mAP, F1/F2, SSIM) and MATLAB scripts for graphs
 
 For easy overview of dependencies we added a single Dockerfile for every module.  
-Modules did run fused together on our IKI-GPU-server. As training of YOLO (especially the larger models) needs a lot of VRAM we recommend this for future users of this repo/code.
+Modules did run fused together on our IKI-GPU-server. As training of larger YOLO needs a lot of VRAM, we recommend this for future users of this repo/code.
 
 ## Before you start
 ⚠ Dockerfiles contain hardware-related versions (e.g. CUDA) and paths - Please compare with used hardware before you start.
@@ -32,7 +34,14 @@ Build Docker images from within the repo folder with:
 docker compose -f docker/build_all.yml build
 ```
 
-### DeepPrivacy2 - Annonymize your data
+If only a specific module is needed, build them seperatly:
+```bash
+docker compose -f docker/privacy_docker-compose.yml build
+docker compose -f docker/train_docker-compose.yml build
+docker compose -f docker/eval_docker-compose.yml build
+```
+
+## DeepPrivacy2 - Annonymize your data
 
 Run container and enter container:
 ```bash
@@ -61,7 +70,7 @@ Webcam anonymization:
 python3 anonymize.py configs/anonymizers/FB_cse.py --webcam
 ```
 
-### Training of YOLO models
+## Training of YOLO models
 Run container and enter container:
 ```bash
 docker compose -f train_docker-compose.yml up
@@ -83,7 +92,7 @@ Finetune a YOLOv10 model with diffrent layer configurations:
 ./src/train_YOLOv10/train_all_model_sizes.sh
 ```
 
-### Evaluation
+## Evaluation
 Run container and enter container:
 ```bash
 docker compose -f eval_docker-compose.yml up
@@ -127,7 +136,7 @@ This section gives a summary about thier general structure through some minimal 
 
 ⚠ Configure our path to the used data (images and annotation) within the file given through this path.
 
-Model parameter for the training of YOLO can be set in the bash script or in command line when calling ```train.py``` directly. currently supported parametrs are (for description see [parameter description of Ultralytics](https://docs.ultralytics.com/modes/train/#train-settings)):
+Model parameter for the training of YOLO can be set in the bash script or in command line when calling ```train.py``` directly. Currently supported parametrs are (description at [parameter description of Ultralytics](https://docs.ultralytics.com/modes/train/#train-settings)):
 - epochs
 - batch size
 - img size
@@ -201,6 +210,11 @@ path_eval: '/this repo/data/eval' # main path where to save evaluation results, 
 ⚠ Files contain Hardware related versions (e.g. Cuda) and Paths - Please compare with used Hardware before you start.
 
 For every component see specific docker and docker compose file for dependencies.
+
+## Acknowledgements
+This project uses code originally developed by:
+- Hukkelås, Håkon and Lindseth, Frank -  [DeepPrivacy2](https://github.com/hukkelas/deep_privacy2)
+- [yhsmiley](https://github.com/yhsmiley) - [fdet-api](https://github.com/yhsmiley/fdet-api)
 
 ## Authors
 - 🦊 [Sarah Weiß](https://github.com/Fox93)
