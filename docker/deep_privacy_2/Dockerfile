@@ -5,10 +5,9 @@ FROM python:3.9 as BASE
 RUN echo "PS1='🐳  \[\033[1;36m\]\h \[\033[1;34m\]\W\[\033[0;35m\] \[\033[1;36m\]# \[\033[0m\]'" >> /root/.bashrc
 
 # Install base utilities
-RUN apt update && apt install -y \
-    python3-pip
-RUN apt-get update \
-    && apt-get install -y build-essential \
+RUN apt update
+RUN apt install -y python3-pip
+RUN apt-get install -y build-essential \
     && apt-get install -y wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
