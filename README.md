@@ -6,7 +6,7 @@ Code might not ready to run & documentation might not complete.
 # Pipeline for Anonymization, Training and Evaluation of YOLO on Anonymized Data
 This repository provides a pipeline for anonymizing data & train/evaluat YOLO object detection models on anonymized data.
 
-**Link to paper, details of training, graphs and other visualization will be provided at publication**
+**Link to paper, graphs and other visualization will be provided at publication**
 
 **Own Dataset, along further details, will be released upon publication**
 
@@ -19,6 +19,10 @@ This repository provides a pipeline for anonymizing data & train/evaluat YOLO ob
 
 For easy overview of dependencies we added a single Dockerfile for every module.  
 Modules did run fused together on our IKI-GPU-server. As training of larger YOLO needs a lot of VRAM, we recommend this for future users of this repo/code.
+
+**Interested in our training and finetuning?**
+
+See [our training and fine-tuning doc](doc/training_and_finetune.md).
 
 ## Before you start
 ⚠ Dockerfiles contain hardware-related versions (e.g. CUDA) and paths - Please compare with used hardware before you start.

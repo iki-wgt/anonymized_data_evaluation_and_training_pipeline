@@ -88,7 +88,7 @@ class YOLOv10Trainer:
                          weight_decay=self.weight_decay,
                          workers=48,
                          device=0,
-                         patience=10,
+                         patience=100,
                          save_period=1,
                          plots=True,
                          cache=False,
