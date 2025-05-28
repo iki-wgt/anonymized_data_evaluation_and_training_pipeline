@@ -4,9 +4,6 @@ services:
 
   deepprivacy2:
     container_name: deepprivacy2
-    build:
-      context: ../docker/deep_privacy_2/
-      dockerfile: Dockerfile
     image: deepprivacy2
     runtime: nvidia
     environment:

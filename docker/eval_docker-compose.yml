@@ -4,9 +4,6 @@ services:
 
   eval:
     container_name: eval
-    build:
-      context: ../docker/eval
-      dockerfile: Dockerfile
     image: eval
     runtime: nvidia
     environment:

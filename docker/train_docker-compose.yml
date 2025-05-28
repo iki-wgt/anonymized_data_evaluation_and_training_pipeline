@@ -4,9 +4,6 @@ services:
 
   train_yolo:
     container_name: train_yolo
-    build:
-      context: ../docker/train/
-      dockerfile: Dockerfile
     image: train_yolo
     runtime: nvidia
     environment:

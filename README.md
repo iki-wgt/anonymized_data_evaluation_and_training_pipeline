@@ -34,13 +34,6 @@ Build Docker images from within the repo folder with:
 docker compose -f docker/build_all.yml build
 ```
 
-If only a specific module is needed, build them seperatly:
-```bash
-docker compose -f docker/privacy_docker-compose.yml build
-docker compose -f docker/train_docker-compose.yml build
-docker compose -f docker/eval_docker-compose.yml build
-```
-
 ## DeepPrivacy2 - Annonymize your data
 
 Run container and enter container:
@@ -63,11 +56,6 @@ python3 anonymize.py configs/anonymizers/FB_cse.py -i /root/data/image.jpg --out
 Face Anonymization:
 ```
 python3 anonymize.py configs/anonymizers/face.py -i data/input.jpg --output_path data/output.png
-```
-
-Webcam anonymization:
-```bash
-python3 anonymize.py configs/anonymizers/FB_cse.py --webcam
 ```
 
 ## Training of YOLO models
@@ -150,7 +138,7 @@ Model parameter for the training of YOLO can be set in the bash script or in com
 - warmup momentum
 
 Additional parameters are:
-*model_path*: Path to the pretrained model or None
+*model_path*: Path to the pretrained model or ```None``` for
 *untrained_model*: Untrained model size configuration and path; default='yolov10n.yaml', will load required file automatically
 
 ⚠ If ```model_path``` is set the module will always try to load this model. Setting ```untrained_model``` wont do anything in this case - its only for our own documentation of you training config if a ```model_path``` is given.
@@ -182,7 +170,10 @@ echo "All models trained and saved successfully."
 ### Evaluation
 We set on a specific file structure to load the model from, wich is derived from the way Ultralytics saves the trained weights:
 ```
-model_path + "/" + script argument -net, used as specific folder name + "/weights/last.pt"
+model_path + "/" + script argument "-net" used as specific folder name + "/weights/last.pt"
+
+Example path:
+/path_to_repo/src/train_YOLOv10/runs/detect/fb_yolov10m/weights/last.pt
 ```
 
 Set evaluation parameter in .yaml as descriped in this example:
@@ -200,16 +191,16 @@ path_detections: '/this repo/data/detections' # path where to save detections
 path_eval: '/this repo/data/eval' # main path where to save evaluation results, gets extendet by scene name
 ```
 
-## External dependencies
-- Evaluation results as graphs: MatLab (we worked with MatLab R2024b), [Colormaps](https://www.mathworks.com/matlabcentral/fileexchange/120088-200-colormap), [Heatmaps](https://de.mathworks.com/matlabcentral/fileexchange/24253-customizable-heat-maps)
-
-## Build dependencies
+## Build and Run dependencies
 - Docker & Docker compose
+- [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 
-## Run dependencies
 ⚠ Files contain Hardware related versions (e.g. Cuda) and Paths - Please compare with used Hardware before you start.
 
-For every component see specific docker and docker compose file for dependencies.
+For every component see specific docker and docker compose file for further dependencies.
+
+## External dependencies
+- Evaluation results as graphs: MatLab (we worked with MatLab R2024b) - [Colormaps](https://www.mathworks.com/matlabcentral/fileexchange/120088-200-colormap), [Heatmaps](https://de.mathworks.com/matlabcentral/fileexchange/24253-customizable-heat-maps)
 
 ## Acknowledgements
 This project uses code originally developed by:
@@ -218,6 +209,3 @@ This project uses code originally developed by:
 
 ## Authors
 - 🦊 [Sarah Weiß](https://github.com/Fox93)
-
-# TODO:
-- Add more scripts & useability, code for graph generation, ...
