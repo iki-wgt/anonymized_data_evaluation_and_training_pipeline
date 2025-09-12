@@ -1,30 +1,35 @@
-# Disclaimer
-Repo is currently in a Work-in-Progress state in preparation for paper publication.
-
-Code might not ready to run & documentation might not complete.
-
 # Pipeline for Anonymization, Training and Evaluation of YOLO on Anonymized Data
-This repository provides a pipeline for anonymizing data & train/evaluat YOLO object detection models on anonymized data.
 
-**Link to paper, graphs and other visualization will be provided at publication**
+| [📝 Paper ](https://link.springer.com/chapter/10.1007/978-3-032-02813-6_14) | [🗃️ Download Eval Dataset ](https://www.kaggle.com/datasets/sarahweisskaggle/aaal-eval-dataset) |
 
-**Own Dataset, along further details, will be released upon publication**
-
-**Repo is currently in a Work-in-Progress state in preparation for paper publication** 
+This repository provides a pipeline for anonymizing data & train/evaluate YOLO object detection models on anonymized data.
+ 
 
 **Features**:
-- Face and full-body anonymization via DeepPrivacy2
-- YOLO training with flexible configuration
-- Evaluation using enhanced COCO metrics (AP, mAP, F1/F2, SSIM) and MATLAB scripts for graphs
+- Face and full-body anonymization via [DeepPrivacy2](https://github.com/hukkelas/deep_privacy2)
+- [YOLO training](https://github.com/ultralytics/ultralytics) with flexible configuration
+- Evaluation using [enhanced COCO metrics](https://github.com/yhsmiley/fdet-api) (AP, mAP, F1/F2, SSIM) and MATLAB scripts for graphs
 
-For easy overview of dependencies we added a single Dockerfile for every module.  
-Modules did run fused together on our IKI-GPU-server. As training of larger YOLO needs a lot of VRAM, we recommend this for future users of this repo/code.
+**Workflow**
+![](doc/workflow.png)
+
+**Interested in a more detailed view of our experiments?**
+
+See [our workflows for single experiments](doc/experiments.md).
 
 **Interested in our training and finetuning?**
 
 See [our training and fine-tuning doc](doc/training_and_finetune.md).
 
+**Interested in our own Eval Dataset?**
+
+Download it [here](https://www.kaggle.com/datasets/sarahweisskaggle/aaal-eval-dataset).
+
+
 ## Before you start
+For easy overview of dependencies we added a single Dockerfile for every module.  
+Modules did run fused together on our GPU-server. As training of larger YOLO needs a lot of VRAM, we recommend this for future users of this repo/code.
+
 ⚠ Dockerfiles contain hardware-related versions (e.g. CUDA) and paths - Please compare with used hardware before you start.
 
 ⚠ Configure volume mounts and all paths to suit your system and structure - see Dockerfiles and configuration files depending on what you want to do.
@@ -38,7 +43,7 @@ Build Docker images from within the repo folder with:
 docker compose -f docker/build_all.yml build
 ```
 
-## DeepPrivacy2 - Annonymize your data
+## Annonymize your data
 
 Run container and enter container:
 ```bash
@@ -48,8 +53,7 @@ docker compose -f privacy_docker-compose.yml up
 docker compose exec -it deepprivacy2 bash
 ```
 
-Configure data paths and wanted anonymization mode in ```/root/deep_privacy2/anonymize.py```.
-Run Anonymization with ```python3 anonymize.py```.
+Configure data paths and wanted anonymization mode and run Anonymization with ```python3 anonymize.py```.
 
 
 Full-Body Anonymization:
@@ -210,6 +214,8 @@ For every component see specific docker and docker compose file for further depe
 This project uses code originally developed by:
 - Hukkelås, Håkon and Lindseth, Frank -  [DeepPrivacy2](https://github.com/hukkelas/deep_privacy2)
 - [yhsmiley](https://github.com/yhsmiley) - [fdet-api](https://github.com/yhsmiley/fdet-api)
+- [Ultralytics](https://github.com/ultralytics/ultralytics)
+- [COCO API](https://github.com/cocodataset/cocoapi)
 
 ## Authors
 - 🦊 [Sarah Weiß](https://github.com/Fox93)
