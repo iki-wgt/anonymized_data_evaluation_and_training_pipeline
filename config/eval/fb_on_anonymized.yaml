@@ -1,0 +1,11 @@
+scene_name: 'fb_on_anonymized' # name of dataset
+path_anno: 'path_to_repo/data/coco/annotations/instances_val2017.json' # path of coco annotations
+path_imgs: 'path_to_repo/src/train_YOLOv10/datasets/images/fb_val_full_coco'
+model_path: 'path_to_repo/src/train_YOLOv10/runs/detect'
+image_file_format: 'png'
+# array of wanted img ids (null means all ids)
+img_ids: null # img to be evaluated on
+cat_ids: null # wanted ids
+# evaluation save paths
+path_detections: 'path_to_repo/data/detections' # path where to save detections
+path_eval: 'path_to_repo/data/eval' # path where to save evaluation results

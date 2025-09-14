@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  train_yolo:
+    image: train_yolo
+    build:
+      context: ..
+      dockerfile: docker/train/Dockerfile
+
+  # deepprivacy2:
+  #   image: deepprivacy2
+  #   build:
+  #     context: ..
+  #     dockerfile: docker/deep_privacy_2/Dockerfile
+
+  eval:
+    image: eval
+    build:
+      context: ..
+      dockerfile: docker/eval/Dockerfile

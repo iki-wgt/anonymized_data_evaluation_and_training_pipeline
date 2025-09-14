@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  deepprivacy2:
+    container_name: deepprivacy2
+    image: deepprivacy2
+    runtime: nvidia
+    environment:
+      DISPLAY: $DISPLAY
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,video,utility,graphics
+      QT_X11_NO_MITSHM: '1'
+    network_mode: host
+    ipc: host
+    privileged: true
+    stdin_open: true
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $HOME/.Xauthority:/root/.Xauthority
+      - ../data/:/root/deep_privacy2/data/
+    command:
+    - bash
+    - -c
+    - | 
+        tail -f /dev/null 
